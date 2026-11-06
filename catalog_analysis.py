@@ -63,6 +63,7 @@ def rating_tier(rating):
     else:
         return 'слабо' if rating < 5 else 'средне'
 
+
 def decade_label(year):
     """Возвращает метку возраста фильма"""
     match year:
@@ -92,6 +93,7 @@ while i < len(movies):
 else:
     print('Шедевров не найдено')
 
+
 def count_long_movies(movies, threshold=120):
     """Считает количество фильмов длиннее заданного количества минут"""
     res_count = 0
@@ -103,3 +105,32 @@ def count_long_movies(movies, threshold=120):
     return res_count
 
 # print(count_long_movies(movies))
+
+'''Этап 4. Строки'''
+def normalize_title(title):
+    """Которая приводит строку к формату Title Case (каждое слово с заглавной буквы)"""
+    words = title.split(' ')
+    title_words = [word[0].upper() + word[1:] for word in words]
+
+    return ' '.join(title_words)
+
+
+def make_slug(title):
+    """Превращает нормализованное название в «слаг»"""
+    return title.lower().replace(' ', '-')
+
+
+def format_report_line(movie):
+    """Возвращает строку с описанием фильма"""
+    return (f'"{normalize_title(movie["title"])}" ({movie["year"]}) - {movie["rating"]}/10, '
+            f'{duration_in_hours(movie["duration_min"])}, жанры: {', '.join(list(movie["genres"]))}')
+
+
+# Проверки работы функций
+# print(normalize_title("silent hours"))
+# print(make_slug("Silent Hours"))
+# print(format_report_line(movies[7]))
+
+
+
+
