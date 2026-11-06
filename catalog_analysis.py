@@ -43,7 +43,7 @@ def catalog_age_stats(movies, current_year=2026):
 
 
 def duration_in_hours(minutes):
-    """переводит минуты в формат "2ч 35м"""
+    """Переводит минуты в формат "2ч 35м"""
 
     return f'{minutes // 60}ч {minutes % 60}м'
 
@@ -51,3 +51,28 @@ def duration_in_hours(minutes):
 # print(average_rating(movies))
 # print(catalog_age_stats(movies))
 # print(duration_in_hours(301))
+
+'''Этап 2. Условия и match'''
+def rating_tier(rating):
+    """Возвращает категорию фильма по его оценке"""
+
+    if rating >= 9:
+        return 'шедевр'
+    elif rating >= 7:
+        return 'хорошо'
+    else:
+        return 'слабо' if rating < 5 else 'средне'
+
+def decade_label(year):
+    """Возвращает метку возраста фильма"""
+    match year:
+        case _ if year > 2020:
+            return 'новые'
+        case _ if year < 2015:
+            return 'старые'
+        case _:
+            return 'недавние'
+
+# Проверки работы функций
+# print(rating_tier(9.2))
+# print(decade_label(2014))
