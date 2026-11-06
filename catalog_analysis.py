@@ -123,7 +123,7 @@ def make_slug(title):
 def format_report_line(movie):
     """Возвращает строку с описанием фильма"""
     return (f'"{normalize_title(movie["title"])}" ({movie["year"]}) - {movie["rating"]}/10, '
-            f'{duration_in_hours(movie["duration_min"])}, жанры: {', '.join(list(movie["genres"]))}')
+            f'{duration_in_hours(movie["duration_min"])}, жанры: {', '.join(sorted(list(movie["genres"])))}')
 
 
 # Проверки работы функций
@@ -131,6 +131,26 @@ def format_report_line(movie):
 # print(make_slug("Silent Hours"))
 # print(format_report_line(movies[7]))
 
+'''Этап 5. Списки'''
+def sorted_movies_info_by_rating(movies):
+    """
+    Вспомогательная функция (не по заданию), сортирует список с полной информацией по фильмам,
+    переиспользуется в функциях по заданию
+    """
+    return sorted(movies, key=lambda x: x["rating"], reverse=True)
 
 
+def titles_sorted_by_rating(movies):
+    """Возвращает список названий фильмов, отсортированных по убыванию рейтинга"""
+    return [film["title"] for film in sorted_movies_info_by_rating(movies)]
 
+
+def top_n_by_rating(movies, n=3):
+    """Возвращает список из n кортежей (title, rating) — топ по рейтингу"""
+    sorted_movies = sorted_movies_info_by_rating(movies)
+
+    return [(sorted_movies[i]["title"], sorted_movies[i]["rating"]) for i in range(n)]
+
+# Проверки работы функций
+# print(titles_sorted_by_rating(movies))
+# print(top_n_by_rating(movies, 3))
