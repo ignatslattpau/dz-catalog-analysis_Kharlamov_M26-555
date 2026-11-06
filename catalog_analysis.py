@@ -154,3 +154,35 @@ def top_n_by_rating(movies, n=3):
 # Проверки работы функций
 # print(titles_sorted_by_rating(movies))
 # print(top_n_by_rating(movies, 3))
+
+'''Этап 6. Словари'''
+def count_by_genre(movies):
+    """Возвращает словарь с количеством фильмов каждого жанра"""
+    genres_count = {}
+
+    for film in movies:
+        for genre in film["genres"]:
+            genres_count[genre] = genres_count.get(genre, 0) + 1
+
+    return genres_count
+
+
+def actor_filmography(movies):
+    """Словарь со списком фильмов каждого актера"""
+    actors_films = {}
+
+    for film in movies:
+        for actor in film["actors"]:
+            films = actors_films.get(actor, [])
+            films.append(film["title"])
+            actors_films[actor] = films
+
+    return actors_films
+
+# ловарь для фильмов с рейтингом выше среднего
+titles_ratings = {film["title"]: film["rating"] for film in movies if film["rating"] > average_rating(movies)}
+
+# Проверки работы функций
+# print(titles_ratings)
+# print(actor_filmography(movies))
+# print(count_by_genre(movies))
