@@ -220,3 +220,20 @@ def genres_only_in_one(movies_a, movies_b):
 # print(common_actors(movies[0], movies[3]))       # {"O. Isaac"}
 # print(genres_only_in_one(movies[5:6], movies[:5]))  # {"mystery"}
 
+'''Этап 8. Итераторы и генераторы'''
+def iter_high_rated(movies, min_rating=8.0):
+    """Генератор информации по фильмам, с рейтингом не ниже мнинмального"""
+    for film in movies:
+        if film["rating"] >= min_rating:
+            yield film
+
+
+sum_duration_good_films = sum(m["duration_min"] for m in movies if m["rating"] > 7)
+
+# for movie in iter_high_rated(movies):
+#     print(format_report_line(movie))
+# # "The Dune Chronicles" (2021) — 8.6/10, 2ч 35м, жанры: drama, sci-fi
+# # "Midnight In Oslo" (2020) — 8.9/10, 2ч 4м, жанры: mystery, thriller
+# # "The Quiet Algorithm" (2024) — 9.2/10, 1ч 58м, жанры: drama, sci-fi
+#
+# print(sum_duration_good_films)  # 713
