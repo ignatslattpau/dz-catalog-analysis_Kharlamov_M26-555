@@ -76,3 +76,30 @@ def decade_label(year):
 # Проверки работы функций
 # print(rating_tier(9.2))
 # print(decade_label(2014))
+
+'''Этап 3. Циклы'''
+for film in movies:
+    if 'comedy' in film["genres"]:
+        continue
+    print(film["title"])
+
+i = 0
+while i < len(movies):
+    if movies[i]["rating"] > 9.0:
+        print(movies[i]["title"])
+        break
+    i += 1
+else:
+    print('Шедевров не найдено')
+
+def count_long_movies(movies, threshold=120):
+    """Считает количество фильмов длиннее заданного количества минут"""
+    res_count = 0
+
+    for film in movies:
+        if film["duration_min"] > threshold:
+            res_count += 1
+
+    return res_count
+
+# print(count_long_movies(movies))
