@@ -186,3 +186,37 @@ titles_ratings = {film["title"]: film["rating"] for film in movies if film["rati
 # print(titles_ratings)
 # print(actor_filmography(movies))
 # print(count_by_genre(movies))
+
+'''Этап 7. Множества'''
+def all_genres(movies):
+    """Возвращает множество уникальных жанров каталога"""
+    result = set()
+
+    for film in movies:
+        result.update(film["genres"])
+
+    return result
+
+
+def common_actors(movie1, movie2):
+    """Возвращает множество актеров, снимавшихся в обоих фильмах"""
+    return set(movie1["actors"]) & set(movie2["actors"])
+
+
+def genres_only_in_one(movies_a, movies_b):
+    """Возвращает жанры встречающиеся в первой группе фильмов, но не встречающихся во второй группе фильмов"""
+    genres_a = set()
+    genres_b = set()
+
+    for film in movies_a:
+        genres_a.update(film["genres"])
+    for film in movies_b:
+        genres_b.update(film["genres"])
+
+    return genres_a - genres_b
+
+# Проверки работы функций
+# print(all_genres(movies))
+# print(common_actors(movies[0], movies[3]))       # {"O. Isaac"}
+# print(genres_only_in_one(movies[5:6], movies[:5]))  # {"mystery"}
+
