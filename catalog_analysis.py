@@ -20,3 +20,34 @@ movies = [
     {"title": "Red Harbor", "year": 2018, "genres": {"action", "thriller"},
      "rating": 7.3, "duration_min": 129, "actors": ["P. Diaz", "T. Chalamet"]},
 ]
+
+'''Этап 1. Разминка: переменные, числа, math'''
+from math import ceil
+
+
+def average_rating(movies):
+    """Возвращает среднюю оценку по каталогу, округленную до одного знака"""
+
+    sum_ratings = sum([film["rating"] for film in movies])
+    len_ratings = len(movies)
+
+    return round(sum_ratings / len_ratings, 1)
+
+
+def catalog_age_stats(movies, current_year=2026):
+    """Возвращает кортеж (самый старый фильм в годах, самый новый фильм в годах, среднее) по возрасту фильмов"""
+
+    films_ages = [current_year - film["year"] for film in movies]
+
+    return max(films_ages), min(films_ages), ceil(sum(films_ages) / len(films_ages))
+
+
+def duration_in_hours(minutes):
+    """переводит минуты в формат "2ч 35м"""
+
+    return f'{minutes // 60}ч {minutes % 60}м'
+
+# Проверки работы функций
+# print(average_rating(movies))
+# print(catalog_age_stats(movies))
+# print(duration_in_hours(301))
