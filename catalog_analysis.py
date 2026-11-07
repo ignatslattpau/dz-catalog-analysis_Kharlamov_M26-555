@@ -230,10 +230,31 @@ def iter_high_rated(movies, min_rating=8.0):
 
 sum_duration_good_films = sum(m["duration_min"] for m in movies if m["rating"] > 7)
 
-# for movie in iter_high_rated(movies):
-#     print(format_report_line(movie))
-# # "The Dune Chronicles" (2021) — 8.6/10, 2ч 35м, жанры: drama, sci-fi
-# # "Midnight In Oslo" (2020) — 8.9/10, 2ч 4м, жанры: mystery, thriller
-# # "The Quiet Algorithm" (2024) — 9.2/10, 1ч 58м, жанры: drama, sci-fi
-#
+for movie in iter_high_rated(movies):
+    print(format_report_line(movie))
+# "The Dune Chronicles" (2021) — 8.6/10, 2ч 35м, жанры: drama, sci-fi
+# "Midnight In Oslo" (2020) — 8.9/10, 2ч 4м, жанры: mystery, thriller
+# "The Quiet Algorithm" (2024) — 9.2/10, 1ч 58м, жанры: drama, sci-fi
+
 # print(sum_duration_good_films)  # 713
+
+'''Этап 9. Итоговый отчет'''
+def build_report(movies):
+    return f'''
+ОТЧЕТ ПО КАТАЛОГУ
+Средний рейтинг: {average_rating(movies)}
+Средний возраст фильмов: {catalog_age_stats(movies)[2]} лет
+
+Топ-3 фильма:
+  {format_report_line(sorted_movies_info_by_rating(movies)[0])}
+  {format_report_line(sorted_movies_info_by_rating(movies)[1])}
+  {format_report_line(sorted_movies_info_by_rating(movies)[2])}
+  
+Фильмов по жанрам
+  {'\n  '.join([key + ' — ' + str(value) for key, value in count_by_genre(movies).items()])}
+
+Все жанры каталога: {', '.join(all_genres(movies))}
+'''
+
+if __name__ == "__main__":
+    print(build_report(movies))
