@@ -1,6 +1,9 @@
+from math import ceil
+
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
-     "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
+     "rating": 8.6, "duration_min": 155,
+     "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
     {"title": "Kitchen Stories", "year": 2019, "genres": {"comedy", "drama"},
      "rating": 7.1, "duration_min": 98, "actors": ["A. Novak", "M. Ferguson"]},
     {"title": "silent hours", "year": 2016, "genres": {"thriller", "drama"},
@@ -22,9 +25,6 @@ movies = [
 ]
 
 '''Этап 1. Разминка: переменные, числа, math'''
-from math import ceil
-
-
 def average_rating(movies):
     """Возвращает среднюю оценку по каталогу, округленную до одного знака"""
 
@@ -35,7 +35,10 @@ def average_rating(movies):
 
 
 def catalog_age_stats(movies, current_year=2026):
-    """Возвращает кортеж (самый старый фильм в годах, самый новый фильм в годах, среднее) по возрасту фильмов"""
+    """
+    Возвращает кортеж (самый старый фильм в годах, самый новый фильм в годах, среднее)
+    по возрасту фильмов
+    """
 
     films_ages = [current_year - film["year"] for film in movies]
 
@@ -122,8 +125,10 @@ def make_slug(title):
 
 def format_report_line(movie):
     """Возвращает строку с описанием фильма"""
-    return (f'"{normalize_title(movie["title"])}" ({movie["year"]}) - {movie["rating"]}/10, '
-            f'{duration_in_hours(movie["duration_min"])}, жанры: {', '.join(sorted(list(movie["genres"])))}')
+    return (f'"{normalize_title(movie["title"])}" '
+            f'({movie["year"]}) - {movie["rating"]}/10, '
+            f'{duration_in_hours(movie["duration_min"])}, '
+            f'жанры: {', '.join(sorted(list(movie["genres"])))}')
 
 
 # Проверки работы функций
@@ -134,7 +139,8 @@ def format_report_line(movie):
 '''Этап 5. Списки'''
 def sorted_movies_info_by_rating(movies):
     """
-    Вспомогательная функция (не по заданию), сортирует список с полной информацией по фильмам,
+    Вспомогательная функция (не по заданию),
+    сортирует список с полной информацией по фильмам,
     переиспользуется в функциях по заданию
     """
     return sorted(movies, key=lambda x: x["rating"], reverse=True)
@@ -179,8 +185,9 @@ def actor_filmography(movies):
 
     return actors_films
 
-# ловарь для фильмов с рейтингом выше среднего
-titles_ratings = {film["title"]: film["rating"] for film in movies if film["rating"] > average_rating(movies)}
+# Словарь для фильмов с рейтингом выше среднего
+titles_ratings = {film["title"]: film["rating"] for film in movies
+                  if film["rating"] > average_rating(movies)}
 
 # Проверки работы функций
 # print(titles_ratings)
@@ -204,7 +211,10 @@ def common_actors(movie1, movie2):
 
 
 def genres_only_in_one(movies_a, movies_b):
-    """Возвращает жанры встречающиеся в первой группе фильмов, но не встречающихся во второй группе фильмов"""
+    """
+    Возвращает жанры встречающиеся в первой группе фильмов,
+    но не встречающихся во второй группе фильмов
+    """
     genres_a = set()
     genres_b = set()
 
@@ -251,7 +261,8 @@ def build_report(movies):
   {format_report_line(sorted_movies_info_by_rating(movies)[2])}
   
 Фильмов по жанрам
-  {'\n  '.join([key + ' — ' + str(value) for key, value in count_by_genre(movies).items()])}
+  {'\n  '.join([key + ' — ' + str(value) for key, value 
+                in count_by_genre(movies).items()])}
 
 Все жанры каталога: {', '.join(all_genres(movies))}
 '''
